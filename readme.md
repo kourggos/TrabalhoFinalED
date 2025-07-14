@@ -76,18 +76,18 @@ Tabela Hash
 
 Antes da execução, apenas o código-fonte e o arquivo nomes.txt são necessários. Após a execução, o programa pode criar a seguinte estrutura de diretórios e arquivos:
 
-.
-├── main.c
-├── nomes.txt
-└── files/
-    ├── registros.bin
-    ├── registros.txt
-    ├── heapRegistros.bin
-    ├── hashRegistros.bin
-    ├── bplusRegistros.bin
-    ├── arquivoDadosArvore.bin
-    ├── arquivoIndicesArvore.bin
-    └── arquivoMetadadosArvore.txt
+    .
+    ├── main.c
+    ├── nomes.txt
+    └── files/
+        ├── registros.bin
+        ├── registros.txt
+        ├── heapRegistros.bin
+        ├── hashRegistros.bin
+        ├── bplusRegistros.bin
+        ├── arquivoDadosArvore.bin
+        ├── arquivoIndicesArvore.bin
+        └── arquivoMetadadosArvore.txt
 
     É importante colocar "files/" antes do nome do arquivo para achar o diretório
 
@@ -109,9 +109,9 @@ Compilar e executar
 
 Compilação
 
-gcc main.c -o programaPrincipal
+    gcc main.c -o main
 
-./programaPrincipal
+    ./main
 
 Execução
 
@@ -137,6 +137,6 @@ Execução
 
         No menu da Árvore B+, a primeira ação deve ser construir a árvore (opção 'c'). Depois, você pode inserir, remover ou buscar registros. Caso esteja utilizando um arquivo preenchido com a árvore.
 
-🔗 Dependências
+ Dependências
 
     nomes.txt: O programa depende de um arquivo chamado nomes.txt para gerar nomes de alunos aleatórios. Este arquivo deve conter uma lista de nomes e sobrenomes separados por ponto e vírgula (;), com um nome/sobrenome por linha. A função criaNomeAleatorio seleciona 4 partes aleatórias deste arquivo para compor um nome completo.
