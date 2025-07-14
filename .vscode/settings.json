@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "cmath": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "utility": "c",
+        "string.h": "c",
+        "conio.h": "c"
+    }
+}
