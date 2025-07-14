@@ -37,6 +37,17 @@ struct metadados { // primeiro tem a flag raizfolha, depois tem o ponteiro pra r
     int n; // numero de elementos na árvore
 }; typedef struct metadados Meta;
 
+void limparBufferEntrada() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+//pausa a execução do programa até que o usuário pressione Enter.
+ 
+void pressioneEnterParaContinuar() {
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+}
 
 long long geraRand(long long lim) {
     /*Gera inteiro aleatório [0, lim)*/
@@ -533,10 +544,7 @@ int menuHeap(void) {
                 break;
         }
 
-        do {
-            printf("\nAperte enter para continuar.\n\n");
-            scanf("%c", &continua);
-        } while (continua != '\n');
+        pressioneEnterParaContinuar();
         
     } while (c != 's');
     free(reg);
@@ -851,10 +859,7 @@ int menuHash(void) { // tratar tabela nao inicializada
                 exit(0);
                 break;
         }
-        do {
-            printf("\nAperte enter para continuar.\n\n");
-            scanf("%c", &continua);
-        } while (continua != '\n');
+        pressioneEnterParaContinuar();
         
     } while (c != 's');
 
@@ -2437,10 +2442,7 @@ int menuArvoreBMais(void) {
                 break;
         }
         
-        do {
-            printf("\nAperte enter para continuar.\n\n");
-            scanf("%c", &continua);
-        } while (continua != '\n');
+        pressioneEnterParaContinuar();
     } while (c != 's');
 
 
@@ -2455,19 +2457,6 @@ int menuArvoreBMais(void) {
 
     fclose(fregs);
     fclose(findice);
-}
-
-void limparBufferEntrada() {
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-}
-
-/**
- * @brief Pausa a execução do programa até que o usuário pressione Enter.
- */
-void pressioneEnterParaContinuar() {
-    printf("\nPressione ENTER para continuar...");
-    getchar();
 }
 
 
@@ -2506,10 +2495,10 @@ int main(void) {
                 pressioneEnterParaContinuar();
                 break;
             case '5':
-                printf("Encerrando o programa. Ate mais!\n");
+                printf("Encerrando o programa.\n");
                 break;
             default:
-                printf("Opcao invalida. Tente novamente.\n");
+                printf("Opção inválida. Tente novamente.\n");
                 pressioneEnterParaContinuar();
                 break;
         }
