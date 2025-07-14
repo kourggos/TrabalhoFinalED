@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define ORDEM 2
+#define ORDEM 64/4 // tamanho do bloco registro / tamanho da chave
 #define N_CHAVES 2*ORDEM
 
 struct reg {

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#define ORDEM 10
+#define ORDEM 64/4 // tamanho do bloco registro / tamanho da chave
 #define N_CHAVES 2*ORDEM
 
 struct aluno {
