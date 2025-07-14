@@ -72,7 +72,7 @@ Tabela Hash
 
         Arquivo de Dados (.bin): Contém os nós folha da árvore, onde os registros completos (Registro) são armazenados. Os nós folha são ligados sequencialmente para permitir a travessia ordenada.
 
- Estrutura dos Arquivos
+ Arquivos
 
 Antes da execução, apenas o código-fonte e o arquivo nomes.txt são necessários. Após a execução, o programa pode criar a seguinte estrutura de diretórios e arquivos:
 
@@ -100,6 +100,8 @@ Antes da execução, apenas o código-fonte e o arquivo nomes.txt são necessár
     As estruturas também podem escrever seus registros em um arquivo texto para melhor visualização;
 
     O programa vem com alguns exemplos de estruturas já montadas em arquivo, são os arquivos enumerados de 0 a 4 no diretório files/
+
+    O diretório contém diversos outros arquivos, correspondendo às estruturas implementadas na main.c, mas, apesar de funcionarem como programas separados, servem mais para verificar a implementação sem precisar procurar na main.
 
 Compilar e executar
 
