@@ -1813,33 +1813,6 @@ int insereNaFolha(FILE *findice, FILE *fdados, Registro *reg, int posicao, Meta 
 
 
     } else {
-        // NoFolha *novoNo = (NoFolha*)malloc(sizeof(NoFolha));
-        // fseek(fdados, 0, SEEK_END);
-        // novoNo->m = N_CHAVES/2;
-        // novoNo->pai = raiz->pai;
-        // novoNo->prox = raiz->prox;
-        // raiz->prox = ftell(fdados) / sizeof(NoFolha);
-        // raiz->m = N_CHAVES/2;
-
-        // for (int i=0; i<raiz->m; i++) {
-        //         if (raiz->reg[i]->cpf / 100 > reg->cpf / 100) { // procura onde a chave seria inserida
-        //             inddomeio = N_CHAVES / 2;
-        //             if (i != inddomeio) { // se o que eu quero adicionar nao é o do meio, pega o do meio do registro
-        //                 chavedomeio = raiz->reg[inddomeio]->cpf / 100;
-        //             } else {
-        //                 chavedomeio = reg->cpf / 100;
-        //             }
-        //         }
-        //     }
-
-        // for (int i=0; i<N_CHAVES+1;i++) {
-        //     if (i == inddomeio) {
-        //         novoNo->reg[0] = reg;
-        //     } else if (i < N_CHAVES/2){
-        //         raiz->
-        //     }
-        // }
-
         for (int i=0; i<raiz->m; i++) { // tem espaço pra adicionar na folha
             if (raiz->reg[i].cpf / 100 > reg->cpf / 100) { // procura onde a chave deve ser inserida
                 int j = raiz->m;

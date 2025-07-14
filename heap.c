@@ -187,7 +187,7 @@ int main(void) {
     char c, b, nomeArq[50] = "files/heapRegistros0.bin";
     Registro *reg = (Registro*)malloc(sizeof(Registro));
 
-    // Inicialização do arquivo e do Heap
+    // nicialização do arquivo e do Heap
     fp = fopen(nomeArq, "rb");
     if (fp == NULL) {
         perror("Não foi possível abrir o arquivo.");
