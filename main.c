@@ -71,6 +71,33 @@ long long geraRand(long long lim) {
     }
 }
 
+void ajustaCPF(long long cpf, char *cpfstring) {
+    char cpfst[15]; 
+    
+    sprintf(cpfst, "%011lld", cpf);
+
+    sprintf(cpfstring, "%.3s.%.3s.%.3s-%.2s",
+            cpfst,      
+            cpfst + 3,  
+            cpfst + 6,  
+            cpfst + 9); 
+}
+
+void escreveRegistro(Registro *reg, FILE*fp){
+
+    char cpfstring[15]; 
+    ajustaCPF(reg->cpf, cpfstring); 
+
+    fprintf(fp, "CPF: %s | Nome: %s | Nota: %d\n", cpfstring, reg->nome, reg->nota);
+}
+
+void imprimeRegistro(Registro *reg){
+    char cpfstring[15]; 
+    ajustaCPF(reg->cpf, cpfstring); 
+
+    printf("CPF: %s | Nome: %s | Nota: %d\n", cpfstring, reg->nome, reg->nota);
+}
+
 void criaNomeAleatorio(FILE *arqNomes, char nome[50]) {
     int r, tamLista=201, i=0;
     char c;
@@ -369,24 +396,26 @@ void imprimeArquivo(FILE *fp, int n) {
         fread(&reg->cpf, sizeof(long long), 1, fp);
         fread(reg->nome, sizeof(char), 50, fp);
         fread(&reg->nota, sizeof(int), 1, fp);
-        printf("CPF: %lld; Nome: %s; Nota: %d\n", reg->cpf, reg->nome, reg->nota);
+        // printf("CPF: %lld; Nome: %s; Nota: %d\n", reg->cpf, reg->nome, reg->nota);
+        imprimeRegistro(reg);
     }
     free(reg);
 }
 
-void escreveHeapArq(FILE *fp, int n) {
+void escreveHeapArq(FILE *fp, FILE *fnovo, int n) {
     int h = 1;
     fseek(fp, 0, SEEK_SET);
     Registro *reg = (Registro*)malloc(sizeof(Registro));
     for (int i=0; i<n; i++) {
-        if (i == h) {
-            h = 2*h+1;
-            printf("\n");
-        }
+        // if (i == h) {
+        //     h = 2*h+1;
+        //     printf("\n");
+        // }
         fread(&reg->cpf, sizeof(long long), 1, fp);
         fread(reg->nome, sizeof(char), 50, fp);
         fread(&reg->nota, sizeof(int), 1, fp);
-        fprintf(fp, "CPF: %lld; Nome: %s; Nota: %d | ", reg->cpf, reg->nome, reg->nota);
+        // fprintf(fnovo, "CPF: %lld; Nome: %s; Nota: %d | ", reg->cpf, reg->nome, reg->nota);
+        escreveRegistro(reg, fnovo);
     }
     free(reg);
 }
@@ -429,7 +458,7 @@ void imprimeHeapSoNotas(FILE *fp, int n) {
 }
 
 int menuHeap(void) {
-    FILE *fp;
+    FILE *fp, *fnovo;
     int n, continua=0;
     char c, b, nomeArq[50] = "files/heapRegistros.bin";
     Registro *reg = (Registro*)malloc(sizeof(Registro));
@@ -473,13 +502,13 @@ int menuHeap(void) {
                 scanf("%s", nomeArq);
                 // sprintf(nomeArq, "files/%s", nomeArqPlaceholder);
 
-                fp = fopen(nomeArq, "w");
-                if (fp == NULL) {
+                fnovo = fopen(nomeArq, "w");
+                if (fnovo == NULL) {
                     perror("Não foi possível abrir o arquivo.");
                     return 1;
                 }
 
-                escreveHeapArq(fp, n);
+                escreveHeapArq(fp, fnovo, n);
                 break;
             case 'k':
                 reg = buscaRegistro(fp, 4);
@@ -667,7 +696,9 @@ void escreveHashArq(FILE *fhash, FILE *fp) {
         reg = leRegistro(fhash);
         if (feof(fhash)) return;
         if (reg->cpf != -1) {
-            fprintf(fp, "Indice: %d | CPF: %lld | Nome: %s | Nota: %d\n", i, reg->cpf, reg->nome, reg->nota);
+
+            escreveRegistro(reg, fp);
+            // fprintf(fp, "Indice: %d | CPF: %lld | Nome: %s | Nota: %d\n", i, reg->cpf, reg->nome, reg->nota);
         }
     }
     free(reg);
@@ -681,7 +712,8 @@ void imprimeHash(FILE *fhash) {
         reg = leRegistro(fhash);
         if (feof(fhash)) return;
         if (reg->cpf != -1) {
-            printf("Indice: %d | CPF: %lld | Nome: %s | Nota: %d\n", i, reg->cpf, reg->nome, reg->nota);
+            imprimeRegistro(reg);
+            // printf("Indice: %d | CPF: %lld | Nome: %s | Nota: %d\n", i, reg->cpf, reg->nome, reg->nota);
         }
     }
     free(reg);
@@ -746,7 +778,7 @@ int menuHash(void) { // tratar tabela nao inicializada
                     return 1;
                 }
 
-                escreveHeapArq(fp, n);
+                escreveHashArq(fhash, fp);
                 break;
             case 'b':
                 if (n>0) {
@@ -938,16 +970,6 @@ void escreveNoInternoNoFinal(FILE *fp, NoInterno *no) {
 }
 
 // -------------------------------------------------------------
-
-void escreveRegistro(Registro *reg, FILE*fp){
-
-    fprintf(fp, "CPF: %lld | Nome: %s | Nota: %d\n", reg->cpf, reg->nome, reg->nota);
-}
-
-void imprimeRegistro(Registro *reg){
-
-    printf("CPF: %lld | Nome: %s | Nota: %d\n", reg->cpf, reg->nome, reg->nota);
-}
 
 void imprimeFolha(FILE *fp, int k){
     fseek(fp, k*sizeof(NoFolha), SEEK_SET);
